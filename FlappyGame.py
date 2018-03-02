@@ -7,6 +7,7 @@
 #======================================================
 
 import pygame
+import random
 
 pygame.init()
 
@@ -19,7 +20,20 @@ crashed = False
 
 # define colors
 white = (255, 255, 255)
+red = (255, 0, 0)
+orange = (255, 125, 0)
+yellow = (255, 255, 0)
+green = (0, 255, 0)
+cyan = (0, 255, 255)
 blue = (0, 0, 255)
+violet = (125, 0, 255)
+magenta = (255, 0, 255)
+black = (0, 0, 0)
+
+# make counter object to keep track of game time
+#   use this as a parameter to make new pipes, and guage speed
+myCounter = 0
+
 
 # sample text at top of screen
 #   ...later a similar method will present the scores
@@ -30,7 +44,11 @@ text = font.render("hello, world", True, (0,128,0))
 # make the circle that represents the flappy bird
 # uses x and y position parameters
 def makeCircle(x,y):
-    pygame.draw.circle(game_display, blue, (x,y), 75)
+    pygame.draw.circle(game_display, yellow, (x,y), 25)
+
+# make the pipes
+# def makePipes():
+    
 
 # initialize the position of the bird, at middle of screen
 # half the max screen dimensions (900, 900)
@@ -68,9 +86,15 @@ while not crashed:
         velocity_I = velocity_F
     # update the vertical position of the bird
     y += int(y_change)
-    game_display.fill(white)
+    game_display.fill(black)
     makeCircle(x,y)
+    pygame.draw.rect(game_display, green, (600,-600,100,800))
+    pygame.draw.rect(game_display, green, (600, 400,100,800))
     game_display.blit(text,(300,10))
+    myCounter += 1
+    format_count = "myCounter: %d" % myCounter
+    show_count = font.render(format_count, True, red)
+    game_display.blit(show_count,(600,20))
     pygame.display.update()
     clock.tick(60)
 
