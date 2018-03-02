@@ -17,13 +17,16 @@ clock = pygame.time.Clock()
 crashed = False
 
 white = (255, 255, 255)
-sqImage = pygame.image.load("square.png")
+blue = (0, 0, 255)
 
 font = pygame.font.SysFont("comicsansms",24)
 text = font.render("hello, world", True, (0,128,0))
 
-def square(x, y):
-    game_display.blit(sqImage, (x,y))
+
+# pygame.draw.circle(gameDisplay, white, (x,y), 75)
+
+def makeCircle(x,y):
+    pygame.draw.circle(game_display, blue, (x,y), 75)
 
 x = 10
 y = 10
@@ -43,7 +46,7 @@ while not crashed:
                 x_change = 0
     x += x_chage
     game_display.fill(white)
-    square(x,y)
+    makeCircle(x,y)
     game_display.blit(text,(300,10))
     pygame.display.update()
     clock.tick(60)
