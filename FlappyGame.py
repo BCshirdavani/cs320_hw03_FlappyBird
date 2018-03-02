@@ -28,23 +28,23 @@ text = font.render("hello, world", True, (0,128,0))
 def makeCircle(x,y):
     pygame.draw.circle(game_display, blue, (x,y), 75)
 
-x = 10
-y = 10
-x_chage = 0
+x = 450
+y = 450
+y_change = 0
 
 while not crashed:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                x_chage = -5
-            elif event.key == pygame.K_RIGHT:
-                x_chage = +5
+            # if event.key == pygame.K_LEFT:
+                y_change = -5
+            # elif event.key == pygame.K_RIGHT:
+                # y_change = +5
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                x_change = 0
-    x += x_chage
+            # if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                y_change = +5
+    y += y_change
     game_display.fill(white)
     makeCircle(x,y)
     game_display.blit(text,(300,10))
