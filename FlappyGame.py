@@ -6,6 +6,12 @@
 #
 #======================================================
 
+# TODO:
+#   make pipes - keep it simple, one pipe group at a time...
+#   make collision detector
+#   track score
+#   add start button
+
 import pygame
 import random
 
@@ -33,7 +39,6 @@ black = (0, 0, 0)
 # make counter object to keep track of game time
 #   use this as a parameter to make new pipes, and guage speed
 myCounter = 0
-
 
 # sample text at top of screen
 #   ...later a similar method will present the scores
