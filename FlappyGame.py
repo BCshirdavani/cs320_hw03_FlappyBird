@@ -43,8 +43,6 @@ myCounter = 0
 # sample text at top of screen
 #   ...later a similar method will present the scores
 font = pygame.font.SysFont("comicsansms",24)
-text = font.render("hello, world", True, (0,128,0))
-
 
 # make the circle that represents the flappy bird
 # uses x and y position parameters
@@ -77,15 +75,6 @@ velocity_I = 0
 flap = False
 velocity_F = (velocity_I + gravity)
 
-
-
-
-
-
-
-
-
-
 # intro screen function with start button
 def text_objects(text, font):
     textSurface = font.render(text, True, white)
@@ -93,62 +82,26 @@ def text_objects(text, font):
 
 intro = True
 
-# def game_intro():
-#     intro = True
-
-    # mouse_pos = pos = pygame.mouse.get_pos()
-    # pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
-    
-    # while intro:
-    #     for event in pygame.event.get():
-    #         print(event)
-    #         if event.type == pygame.QUIT:
-    #             pygame.quit()
-    #             quit()
-    #     game_display.fill(black)
-    #     largeText = pygame.font.Font('freesansbold.ttf',115)
-    #     TextSurf, TextRect = text_objects("Flappy Bird", largeText)
-    #     TextRect.center = ((display_w/2),(display_h/2))
-    #     game_display.blit(TextSurf, TextRect)
-
-    #     mouse = pygame.mouse.get_pos()
-
-    #     if 400+100 > mouse[0] > 400 and 550+50 > mouse[1] > 550:
-    #         pygame.draw.rect(game_display, bright_green,(400,550,100,50))
-    #         if pressed1:
-    #             intro = False
-    #             return
-    #         if event.type == pygame.MOUSEBUTTONDOWN:
-    #             intro = False
-    #             return
-    #     else:
-    #         pygame.draw.rect(game_display, green,(400,550,100,50))
-
-    #     smallText = pygame.font.Font("freesansbold.ttf",20)
-    #     textSurf, textRect = text_objects("GO!", smallText)
-    #     textRect.center = ( (400+(100/2)), (550+(50/2)) )
-    #     game_display.blit(textSurf, textRect)
-
-        
 
 
-    #     pygame.display.update()
-    #     clock.tick(60)
-    
+
+
+
 
 
 
 # while loop for the bird movement up/down
 while not crashed:
-    # game_intro()
 
-
+    #-----------------------------------------------------------------  intro screen
+    # game intro screen was pasted in here because the function call 
+    # implementation of it was causing problems...
     mouse_pos = pos = pygame.mouse.get_pos()
     pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
     
     while intro:
         for event in pygame.event.get():
-            print(event)
+            # print(event)
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
@@ -177,14 +130,10 @@ while not crashed:
         game_display.blit(textSurf, textRect)
         pygame.display.update()
         clock.tick(60)
+        #-----------------------------------------------------------------  intro screen
 
 
-
-
-
-
-
-
+    #-----------------------------------------------------------------  game loop 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
@@ -206,11 +155,7 @@ while not crashed:
             crashed = True
     if y > 900 or y < 0:
         crashed = True
-    # if x_dist <= 0 and x_dist >= -100 and ((pipe_y - y) >= 0 or (pipe_y - y) <= -200):
-    #     crashed = True
-    # add point event
-    # elif x_dist > 550:
-    #     score += 1
+
 
     # bird flaps = boost velocity up with no gravity
     if flap == True:
@@ -238,20 +183,21 @@ while not crashed:
         score += 1
     # pygame.draw.rect(game_display, green, (600,-600,100,800))
     # pygame.draw.rect(game_display, green, (600, 400,100,800))
-    game_display.blit(text,(300,10))
+    # game_display.blit(text,(300,10))
     myCounter += 1
     # print points to screen
     format_count = "POINTS: %d" % score
     show_count = font.render(format_count, True, red)
     # print locations to screen
-    locations = "bird x: %d x_dist: %d \n brid y: %d y_dist: %x pipeY: %d gapAT: %d" % (x, x_dist, y, y_dist, pipe_y, gap_y)
-    show_locations = font.render(locations, True, red)
+    # locations = "bird x: %d x_dist: %d \n brid y: %d y_dist: %x pipeY: %d gapAT: %d" % (x, x_dist, y, y_dist, pipe_y, gap_y)
+    # show_locations = font.render(locations, True, red)
 
 
     game_display.blit(show_count,(600,20))
-    game_display.blit(show_locations,(0,500))
+    # game_display.blit(show_locations,(0,500))
     pygame.display.update()
     clock.tick(60)
+    #-----------------------------------------------------------------  game loop
 
 
 
