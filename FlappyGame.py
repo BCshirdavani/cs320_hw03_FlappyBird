@@ -52,8 +52,13 @@ def makeCircle(x,y):
     pygame.draw.circle(game_display, yellow, (x,y), 25)
 
 # make the pipes
-# def makePipes():
-    
+pipe_x = 900
+pipe_y = -400
+def makePipes(x, y):
+    pygame.draw.rect(game_display, green, (x, y, 100 ,800))
+    pygame.draw.rect(game_display, green, (x, (y + 1000), 100 ,800))
+# random numbers for vertical position of pipe gap
+rand = random.Random()
 
 # initialize the position of the bird, at middle of screen
 # half the max screen dimensions (900, 900)
@@ -92,9 +97,18 @@ while not crashed:
     # update the vertical position of the bird
     y += int(y_change)
     game_display.fill(black)
+    # draw new bird position
     makeCircle(x,y)
-    pygame.draw.rect(game_display, green, (600,-600,100,800))
-    pygame.draw.rect(game_display, green, (600, 400,100,800))
+    # draw piped to screen
+    makePipes(pipe_x, pipe_y)
+    # update pipe scrolling left location
+    pipe_x -= 10
+    # when pipe is off screen, restart pipe scroll from right again
+    if pipe_x < -100:
+        pipe_x = 900
+        pipe_y = rand.uniform(-100, -700)
+    # pygame.draw.rect(game_display, green, (600,-600,100,800))
+    # pygame.draw.rect(game_display, green, (600, 400,100,800))
     game_display.blit(text,(300,10))
     myCounter += 1
     format_count = "myCounter: %d" % myCounter
