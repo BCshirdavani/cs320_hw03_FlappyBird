@@ -53,10 +53,13 @@ def makeCircle(x,y):
 
 # make the pipes
 pipe_x = 900
-pipe_y = -400
+pipe_y = 450
+gap_y = 450
 def makePipes(x, y):
     pygame.draw.rect(game_display, green, (x, y, 100 ,800))
-    pygame.draw.rect(game_display, green, (x, (y + 1000), 100 ,800))
+    pygame.draw.rect(game_display, green, (x, (y - 1000), 100 ,800))
+    gap_y = y
+
 # random numbers for vertical position of pipe gap
 rand = random.Random()
 
@@ -65,6 +68,9 @@ rand = random.Random()
 x = 450
 y = 450
 y_change = 0
+x_dist = int(pipe_x - x)
+y_dist = int(pipe_y - y)
+score = 0
 # Kinematics, Physics Estimates
 gravity = 2
 velocity_I = 0
@@ -83,6 +89,23 @@ while not crashed:
         # key up = FALL
         if event.type == pygame.KEYUP:
             flap = False
+
+    # collision detection
+    x_dist = int(pipe_x - x)
+    y_dist = int(pipe_y - y)
+    if x_dist <= 0 and x_dist >= -100:
+        # collision event
+        if (pipe_y - y) >= 0 and (pipe_y - y) <= 200:
+            crashed = False
+        elif (pipe_y - y) < 0 or (pipe_y - y) > 200:
+            crashed = True
+    if y > 900 or y < 0:
+        crashed = True
+    # if x_dist <= 0 and x_dist >= -100 and ((pipe_y - y) >= 0 or (pipe_y - y) <= -200):
+    #     crashed = True
+    # add point event
+    # elif x_dist > 550:
+    #     score += 1
 
     # bird flaps = boost velocity up with no gravity
     if flap == True:
@@ -106,14 +129,22 @@ while not crashed:
     # when pipe is off screen, restart pipe scroll from right again
     if pipe_x < -100:
         pipe_x = 900
-        pipe_y = rand.uniform(-100, -700)
+        pipe_y = gap_y = rand.uniform(100, 700)
+        score += 1
     # pygame.draw.rect(game_display, green, (600,-600,100,800))
     # pygame.draw.rect(game_display, green, (600, 400,100,800))
     game_display.blit(text,(300,10))
     myCounter += 1
-    format_count = "myCounter: %d" % myCounter
+    # print points to screen
+    format_count = "POINTS: %d" % score
     show_count = font.render(format_count, True, red)
+    # print locations to screen
+    locations = "bird x: %d x_dist: %d \n brid y: %d y_dist: %x pipeY: %d gapAT: %d" % (x, x_dist, y, y_dist, pipe_y, gap_y)
+    show_locations = font.render(locations, True, red)
+
+
     game_display.blit(show_count,(600,20))
+    game_display.blit(show_locations,(0,500))
     pygame.display.update()
     clock.tick(60)
 
