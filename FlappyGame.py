@@ -7,9 +7,6 @@
 #======================================================
 
 # TODO:
-#   make pipes - keep it simple, one pipe group at a time...
-#   make collision detector
-#   track score
 #   add start button
 
 import pygame
@@ -18,7 +15,9 @@ import random
 pygame.init()
 
 # set screen size
-game_display = pygame.display.set_mode((900,900))
+display_w = 900
+display_h = 900
+game_display = pygame.display.set_mode((display_w, display_h))
 pygame.display.set_caption("pyGame Practice")
 
 clock = pygame.time.Clock()
@@ -29,7 +28,8 @@ white = (255, 255, 255)
 red = (255, 0, 0)
 orange = (255, 125, 0)
 yellow = (255, 255, 0)
-green = (0, 255, 0)
+green = (0, 200, 0)
+bright_green = (00, 255, 0)
 cyan = (0, 255, 255)
 blue = (0, 0, 255)
 violet = (125, 0, 255)
@@ -78,8 +78,113 @@ flap = False
 velocity_F = (velocity_I + gravity)
 
 
+
+
+
+
+
+
+
+
+# intro screen function with start button
+def text_objects(text, font):
+    textSurface = font.render(text, True, white)
+    return textSurface, textSurface.get_rect()
+
+intro = True
+
+# def game_intro():
+#     intro = True
+
+    # mouse_pos = pos = pygame.mouse.get_pos()
+    # pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
+    
+    # while intro:
+    #     for event in pygame.event.get():
+    #         print(event)
+    #         if event.type == pygame.QUIT:
+    #             pygame.quit()
+    #             quit()
+    #     game_display.fill(black)
+    #     largeText = pygame.font.Font('freesansbold.ttf',115)
+    #     TextSurf, TextRect = text_objects("Flappy Bird", largeText)
+    #     TextRect.center = ((display_w/2),(display_h/2))
+    #     game_display.blit(TextSurf, TextRect)
+
+    #     mouse = pygame.mouse.get_pos()
+
+    #     if 400+100 > mouse[0] > 400 and 550+50 > mouse[1] > 550:
+    #         pygame.draw.rect(game_display, bright_green,(400,550,100,50))
+    #         if pressed1:
+    #             intro = False
+    #             return
+    #         if event.type == pygame.MOUSEBUTTONDOWN:
+    #             intro = False
+    #             return
+    #     else:
+    #         pygame.draw.rect(game_display, green,(400,550,100,50))
+
+    #     smallText = pygame.font.Font("freesansbold.ttf",20)
+    #     textSurf, textRect = text_objects("GO!", smallText)
+    #     textRect.center = ( (400+(100/2)), (550+(50/2)) )
+    #     game_display.blit(textSurf, textRect)
+
+        
+
+
+    #     pygame.display.update()
+    #     clock.tick(60)
+    
+
+
+
 # while loop for the bird movement up/down
 while not crashed:
+    # game_intro()
+
+
+    mouse_pos = pos = pygame.mouse.get_pos()
+    pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
+    
+    while intro:
+        for event in pygame.event.get():
+            print(event)
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        game_display.fill(black)
+        largeText = pygame.font.Font('freesansbold.ttf',115)
+        TextSurf, TextRect = text_objects("Flappy Bird", largeText)
+        TextRect.center = ((display_w/2),(display_h/2))
+        game_display.blit(TextSurf, TextRect)
+
+        mouse = pygame.mouse.get_pos()
+
+        if 400+100 > mouse[0] > 400 and 550+50 > mouse[1] > 550:
+            pygame.draw.rect(game_display, bright_green,(400,550,100,50))
+            if pressed1:
+                intro = False
+                # return
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                intro = False
+                # return
+        else:
+            pygame.draw.rect(game_display, green,(400,550,100,50))
+
+        smallText = pygame.font.Font("freesansbold.ttf",20)
+        textSurf, textRect = text_objects("GO!", smallText)
+        textRect.center = ( (400+(100/2)), (550+(50/2)) )
+        game_display.blit(textSurf, textRect)
+        pygame.display.update()
+        clock.tick(60)
+
+
+
+
+
+
+
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
@@ -148,7 +253,26 @@ while not crashed:
     pygame.display.update()
     clock.tick(60)
 
+
+
   
 
 pygame.quit()
 quit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
